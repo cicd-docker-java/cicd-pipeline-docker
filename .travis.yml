@@ -7,7 +7,7 @@ language: generic
 before_install:
   - sudo apt-get update
   - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine
-  - sudo service docker start
+  - sudo service docker restart
 
 script: |-
    docker build -t jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER . \
