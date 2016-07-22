@@ -1,1 +1,2 @@
 = CI/CD Pipeline - Docker files
+image::https://codeship.com/projects/92461f80-31ca-0134-1880-4aa210a44804/status?branch=master[link="https://codeship.com/projects/164572"]
