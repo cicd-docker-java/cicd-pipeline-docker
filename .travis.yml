@@ -14,3 +14,4 @@ script: |-
    && docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_API_KEY jbaruch-docker.jfrog.io \
    && docker push jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER \
    && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -H "Content-Type:application/json" -X POST https://jbaruch.jfrog.io/jbaruch/api/docker/docker-dev-local/v2/promote -d '{"dockerRepository": "couchbase-javaee","tag": "'$TRAVIS_BUILD_NUMBER'","targetRepo": "docker-dev-local","targetTag": "latest","copy":true}'
+   && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -X PUT https://jbaruch.jfrog.io/jbaruch/api/storage/docker-dev-local/couchbase-javaee/latest?properties=artifactory.refersToVersion=$TRAVIS_BUILD_NUMBER
