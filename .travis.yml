@@ -5,12 +5,8 @@ services: docker
 language: generic
 
 before_install:
-  - sudo sh -c "echo 'deb https://jbaruch.jfrog.io/jbaruch/dockerproject ubuntu-precise main' >> /etc/apt/sources.list"
   - sudo apt-get update
-  - sudo apt-get purge lxc-docker
-  - apt-cache policy docker-engine
-  - sudo apt-get update
-  - sudo apt-get install docker-engine
+  - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine=1.11.1-0~precise
   - sudo service docker start
 
 script: |-
