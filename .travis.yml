@@ -8,9 +8,9 @@ before_install:
   - sudo apt-get update
   - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine
   - sudo service docker restart
-  
+
 script: |-
-   && docker build -t jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER . \
+   docker build -t jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER . \
    && docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_API_KEY jbaruch-docker.jfrog.io \
    && docker push jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER \
    && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -H "Content-Type:application/json" -X POST https://jbaruch.jfrog.io/jbaruch/api/docker/docker-dev-local/v2/promote -d '{"dockerRepository": "couchbase-javaee","tag": "'$TRAVIS_BUILD_NUMBER'","targetRepo": "docker-dev-local","targetTag": "latest","copy":true}' \
