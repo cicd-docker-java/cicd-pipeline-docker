@@ -13,8 +13,8 @@ before_install:
 
 
 script: |-
-   ./jfrog rt config --url https://jbaruch.jfrog.io/jbaruch --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
-   && ./jfrog rt dl --spec docker-dependencies.spec
+   ./jfrog rt config --url https://jbaruch.jfrog.io/jbaruch --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY \
+   && ./jfrog rt dl --spec docker-dependencies.spec \
    && docker build -t jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER . \
    && docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_API_KEY jbaruch-docker.jfrog.io \
    && docker push jbaruch-docker.jfrog.io/couchbase-javaee:$TRAVIS_BUILD_NUMBER \
