@@ -25,5 +25,5 @@ script: |-
    && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -H "Content-Type:application/json" -X POST https://jbaruch.jfrog.io/jbaruch/api/build/promote/couchbase-javaee/$JAVA_BUILD_NUMBER -d '{"status": "contained","comment" : "This build contained in Docker tag couchbase-javaee:'$TRAVIS_BUILD_NUMBER'","ciUser": "'$USER'"}' \
    && echo 'Java build promoted to "Contained" status"' \
    && echo 'Adding Java build number property to the Docker image' \
-   && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -X PUT https://jbaruch.jfrog.io/jbaruch/api/storage/docker-dev-local/couchbase-javaee/$TRAVIS_BUILD_NUMBER?properties=build.containsWarBuildName=couchbase-javaee\;build.containsWarBuildNumber=$JAVA_BUILD_NUMBER \
+   && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -X PUT https://jbaruch.jfrog.io/jbaruch/api/storage/docker-dev-local/couchbase-javaee/$TRAVIS_BUILD_NUMBER --data-urlencode "properties=build.containsWarBuildName=couchbase-javaee;build.containsWarBuildNumber=$JAVA_BUILD_NUMBER" \
    && echo 'build.containsWarBuildName property added'; fi
