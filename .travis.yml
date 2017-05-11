@@ -26,6 +26,6 @@ script: |-
    && echo 'Java build promoted to "Contained" status"' \
    && echo 'Adding Java build number property to the Docker image' \
    && PROP="properties=build.containsWarBuildName=couchbase-javaee;build.containsWarBuildNumber=$JAVA_BUILD_NUMBER" \
-   && echo $PROP
+   && echo $PROP \
    && curl -i -u $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY -X PUT https://jbaruch.jfrog.io/jbaruch/api/storage/docker-dev-local/couchbase-javaee/$TRAVIS_BUILD_NUMBER? --data-urlencode "$PROP" \
    && echo 'build.containsWarBuildName property added'; fi
